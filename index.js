@@ -34,6 +34,15 @@ const UnsavedChangesComponent = Vue.component('UnsavedChanges',{
     mounted() {
         this.addVueListeners(this.$children)
     },
+    beforeRouteLeave (to, from, next) {
+        if (this.$unsaved.dirty()) {
+            if (window.confirm ('There are unsaved changes. Are you sure you want to leave?')) {
+                return next()
+            } 
+            return next(false)
+        }
+        return next()
+    },
     methods: {
         addVueListeners(nodes) {
 
