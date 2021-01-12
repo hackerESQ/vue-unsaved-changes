@@ -53,6 +53,10 @@ const UnsavedChangesComponent = Vue.component('UnsavedChanges',{
 
             })
         }
+    },
+    beforeDestroy() {
+        // clean up
+        this[pluginOptions.globalProperty].dirty(false)
     }
 })
 
@@ -93,8 +97,9 @@ export const UnsavedChanges = () => {
             },
             middleware(next) {
                 // set vue router navigation middleware             
-                if (this.$unsaved.dirty()) {                   
+                if (this[pluginOptions.globalProperty].dirty()) {                   
                     if (window.confirm ('There are unsaved changes. Are you sure you want to leave?')) {
+                        this.isDirty = false
                         return next()
                     } 
                     return next(false)
