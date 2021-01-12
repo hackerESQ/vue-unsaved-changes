@@ -86,7 +86,7 @@ export const UnsavedChanges = () => {
                     return this.isDirty
                 }
             },
-            routerLogic(next) {
+            middleware(next) {
                 if (this.$unsaved.dirty()) {
                     if (window.confirm ('There are unsaved changes. Are you sure you want to leave?')) {
                         return next()
