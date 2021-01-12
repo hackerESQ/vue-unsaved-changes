@@ -60,7 +60,7 @@ const UnsavedChangesComponent = Vue.component('UnsavedChanges',{
  *  Vue Instance Initialization
  */
 
-export const UnsavedChanges = ({...pluginOptions}) => {
+export const UnsavedChanges = () => {
     if (instance) return instance;
   
     instance = new Vue({
