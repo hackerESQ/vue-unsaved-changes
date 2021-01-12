@@ -88,7 +88,7 @@ export const UnsavedChanges = () => {
             },
             middleware(next) {
                 if (this.$unsaved.dirty()) {                   
-                    // native navigation 
+                    // native navigation
                     window.onbeforeunload = function() {
                         return true;
                     };
