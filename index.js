@@ -89,6 +89,7 @@ export const UnsavedChanges = () => {
             middleware(next) {
                 // native navigation
                 window.onbeforeunload = function() {
+                    console.log(this.$unsaved.dirty())
                     return this.$unsaved.dirty();
                 };
                 
