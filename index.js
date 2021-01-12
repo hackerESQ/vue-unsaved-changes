@@ -87,13 +87,13 @@ export const UnsavedChanges = () => {
                 }
             },
             middleware(next) {
+                // native navigation
+                window.onbeforeunload = function() {
+                    return this.$unsaved.dirty();
+                };
+                
+                // vue router navigation                
                 if (this.$unsaved.dirty()) {                   
-                    // native navigation
-                    window.onbeforeunload = function() {
-                        return true;
-                    };
-                    
-                    // vue router navigation
                     if (window.confirm ('There are unsaved changes. Are you sure you want to leave?')) {
                         return next()
                     } 
