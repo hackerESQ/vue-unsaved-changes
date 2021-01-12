@@ -82,18 +82,18 @@ export const UnsavedChanges = () => {
                     // console.log('updating val to: '+val)
                     this.isDirty = val
                     // console.log('new val: ' + this.isDirty)
+                    
+                    // set native navigation middelware
+                    window.onbeforeunload = () => {
+                        console.log(this.$unsaved.dirty())
+                        return this.isDirty();
+                    };
                 } else {
                     return this.isDirty
                 }
             },
             middleware(next) {
-                // native navigation
-                window.onbeforeunload = () => {
-                    console.log(this.$unsaved.dirty())
-                    return this.$unsaved.dirty();
-                };
-                
-                // vue router navigation                
+                // set vue router navigation middleware             
                 if (this.$unsaved.dirty()) {                   
                     if (window.confirm ('There are unsaved changes. Are you sure you want to leave?')) {
                         return next()
