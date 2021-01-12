@@ -85,8 +85,8 @@ export const UnsavedChanges = () => {
                     
                     // set native navigation middelware
                     window.onbeforeunload = () => {
-                        // console.log(this.isDirty)
-                        return this.isDirty;
+                        console.log(this.isDirty || null)
+                        return this.isDirty || null;
                     };
                 } else {
                     return this.isDirty
