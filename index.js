@@ -18,7 +18,8 @@ export const getInstance = () => instance;
 
 const pluginOptions = {
     globalProperty: '$unsaved',
-    listenAttr: 'unsaved-listen'
+    listenAttr: 'unsaved-listen',
+    conditionalAttr: 'unsaved-if',
 }
 
 /**
@@ -36,13 +37,18 @@ const UnsavedChangesComponent = Vue.component('UnsavedChanges',{
     },
     methods: {
         addVueListeners(nodes) {
-
+            // iterate through each node
             nodes.forEach((item) => {
 
+                // add listener if it has the listener attr
                 if (Object.keys(item.$attrs).indexOf(pluginOptions.listenAttr) > -1) {
                     item.$on('input', (e) => {
-                        this[pluginOptions.globalProperty].dirty(true)
-                        this.$emit('change-detected',true)
+                        // check if a conditional has been added
+                        if (Object.keys(this.$attrs).includes(pluginOptions.conditionalAttr) && !!this.$attrs[pluginOptions.conditionalAttr]) {
+                            // set dirty and emit event
+                            this[pluginOptions.globalProperty].dirty(true)
+                            this.$emit('change-detected',true)
+                        }
                     })
                 }    
                 
@@ -82,10 +88,7 @@ export const UnsavedChanges = () => {
         methods: {
             dirty(val=null) {
                 if (val !== null) {
-                    // console.log('currently: '+this.isDirty)
-                    // console.log('updating val to: '+val)
                     this.isDirty = val
-                    // console.log('new val: ' + this.isDirty)
                     
                     // set native navigation middelware
                     window.onbeforeunload = () => {
