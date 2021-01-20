@@ -45,6 +45,41 @@ save() {
 }
 ```
 
+### Example
+
+
+```
+<template>
+    <unsaved-changes>
+    
+        <v-switch 
+            label="Switch Label"
+            v-model="switch"
+            unsaved-listen
+        />
+        
+        <v-btn @click="save">Submit</v-btn>
+
+    </unsaved-changes>
+</template>
+<script>
+    export default {
+        methods: {
+            save() {
+                // save to database...
+                // then... clear "dirty" state
+                this.$unsaved.dirty(false)
+            }
+        },
+        beforeRouteLeave (to, from, next) {
+            this.$unsaved.middleware(next)
+        },
+    }
+</script>
+
+```
+
+
 ### Special cases
 You can also listen to a custom method by setting a custom event on the `unsaved-listen` directive:
 
