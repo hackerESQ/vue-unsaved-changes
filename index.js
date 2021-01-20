@@ -42,7 +42,15 @@ const UnsavedChangesComponent = Vue.component('UnsavedChanges',{
 
                 // add listener if it has the listener attr
                 if (Object.keys(item.$attrs).indexOf(pluginOptions.listenAttr) > -1) {
-                    item.$on('input', (e) => {
+                    
+                    // reads custom event
+                    let event = 'input'
+                    if (item.$attrs[pluginOptions.listenAttr]) {
+                        event = item.$attrs[pluginOptions.listenAttr]
+                    }
+                    
+                    // attaches listener
+                    item.$on(event, (e) => {
                         // check if a conditional has been added
                         if (Object.keys(this.$attrs).includes(pluginOptions.conditionalAttr) && !!this.$attrs[pluginOptions.conditionalAttr]) {
                             // set dirty and emit event
