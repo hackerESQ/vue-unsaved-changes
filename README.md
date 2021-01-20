@@ -1,7 +1,7 @@
 # vue-unsaved-changes
 
 ### Intro 
-Bootstraps an unsaved change listener into your forms using both the native `onbeforeunload` and vue-router's `beforeRouteLeave`
+Bootstraps an unsaved change listener into your forms using both the native `window.onbeforeunload` method and vue-router's `beforeRouteLeave` hook
 
 ### Install
 
