@@ -7,7 +7,7 @@ Bootstraps an unsaved change listener into your forms using both the native `onb
 
 Install using NPM
 
-```npm -i git+https://github.com/hackerESQ/vue-unsaved-changes.git```
+```npm i git+https://github.com/hackerESQ/vue-unsaved-changes.git```
 
 
 Add the following where you initialize Vue (main.js, app.js, etc):
