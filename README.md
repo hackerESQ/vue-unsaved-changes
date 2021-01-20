@@ -3,6 +3,21 @@
 ### Intro 
 Bootstraps an unsaved change listener into your forms using both the native `onbeforeunload` and vue-router's `beforeRouteLeave`
 
+### Install
+
+Install using NPM
+
+```npm -i git+https://github.com/hackerESQ/vue-unsaved-changes.git```
+
+
+Add the following where you initialize Vue (main.js, app.js, etc):
+
+```
+import { UnsavedChangesPlugin } from 'vue-unsaved-changes';
+
+Vue.use(UnsavedChangesPlugin);
+```
+
 ### Use
 Wrap your form in the `<unsaved-changes>` component. 
 
